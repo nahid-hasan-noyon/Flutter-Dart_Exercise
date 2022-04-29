@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import './question.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -10,21 +11,22 @@ class MyApp extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return MyAppstate();
+    return _MyAppstate();     //? adding "_" changes that thing to private that can't be accessed from the outside of that current file.
   }
 }
 
-class MyAppstate extends State<MyApp> {
-  var questionIndex = 0;
+class _MyAppstate extends State<MyApp> {
+  var _questionIndex = 0;
 
   // A Named function
   void buttonWasClicked() {
-    setState(() { // rerender / change the UI 
-      questionIndex += 1;
+    setState(() {
+      // rerender / change the UI
+      _questionIndex += 1;
     });
     if (kDebugMode) {
       // if the app is in debug mode.
-      print(questionIndex); // prints the debug console
+      print(_questionIndex); // prints the debug console
     }
   }
 
@@ -42,13 +44,14 @@ class MyAppstate extends State<MyApp> {
             title: const Text('Quizy'),
           ),
           body: Column(
-            // body can hold only one widget
+            //? body can hold only one widget
             // column is used to use multiple widgets
             children: [
-              Text(
-                questions[questionIndex],
+                Question(    // Text(
+                questions[_questionIndex],
               ),
-              // adding buttons
+
+              //*  adding buttons
               // first way
               const RaisedButton(
                 // striped widgets means these should be used but can be in this version.
@@ -61,7 +64,7 @@ class MyAppstate extends State<MyApp> {
                 child: Text('Answer 2'),
               ),
 
-              // button that do something on a click.
+              //* button that do something on a click.
               // 1. Using named function
               RaisedButton(
                 child: const Text('Answer 3'),
@@ -86,13 +89,13 @@ class MyAppstate extends State<MyApp> {
                 child: const Text('Answer 6'),
                 onPressed: () {
                   if (kDebugMode) {
-                    print('Answer 5 was clicked');
+                    print('Answer 6 was clicked');
                   }
                 },
               ),
               RaisedButton(
                 child: const Text('change the question'),
-                onPressed: buttonWasClicked, 
+                onPressed: buttonWasClicked,
               ),
             ],
           )),
