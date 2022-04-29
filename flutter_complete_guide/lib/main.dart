@@ -5,31 +5,49 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppstate();
+  }
+}
+
+class MyAppstate extends State<MyApp> {
+  var questionIndex = 0;
 
   // A Named function
   void buttonWasClicked() {
+    setState(() { // rerender / change the UI 
+      questionIndex += 1;
+    });
     if (kDebugMode) {
       // if the app is in debug mode.
-      print('button clicked'); // prints the debug console
+      print(questionIndex); // prints the debug console
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    var questions = [
+      'What\'s your favorite color?',
+      'What\'s your favorite animal?'
+    ];
     return MaterialApp(
       home: Scaffold(
           //Creates a visual scaffold for material design widgets
           appBar: AppBar(
             //
-            title: const Text('My First App'),
+            title: const Text('Quizy'),
           ),
           body: Column(
             // body can hold only one widget
             // column is used to use multiple widgets
             children: [
-              const Text('The Questions!'),
+              Text(
+                questions[questionIndex],
+              ),
               // adding buttons
               // first way
               const RaisedButton(
@@ -71,6 +89,10 @@ class MyApp extends StatelessWidget {
                     print('Answer 5 was clicked');
                   }
                 },
+              ),
+              RaisedButton(
+                child: const Text('change the question'),
+                onPressed: buttonWasClicked, 
               ),
             ],
           )),
