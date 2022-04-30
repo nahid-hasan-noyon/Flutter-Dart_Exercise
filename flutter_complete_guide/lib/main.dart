@@ -19,40 +19,57 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppstate extends State<MyApp> {
-  var _questionIndex = 0;
   final _questions = const [
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': ["Red", 'Green', 'Blue', "White"],
+      'answers': [
+        {'option': 'Red', 'score': 1},
+        {'option': 'Green', 'score': 2},
+        {'option': 'Blue', 'score': 3},
+        {'option': 'White', 'score': 4},
+      ],
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ["Ape", 'Snake', 'Lion', "Tiger"],
+      'answers': [
+        {'option': 'Ape', 'score': 1},
+        {'option': 'Snake', 'score': 2},
+        {'option': 'Lion', 'score': 3},
+        {'option': 'Tiger', 'score': 4}
+      ],
     },
     {
       'questionText': 'What\'s your favorite fruit?',
-      'answers': ["Apple", 'Banana', 'Mango', "Papaya"],
+      'answers': [
+        {'option': 'Apple', 'score': 1},
+        {'option': 'Banana', 'score': 2},
+        {'option': 'Mango', 'score': 3},
+        {'option': 'Papaya', 'score': 4}
+      ],
     },
     {
       'questionText': 'What\'s your favorite flower?',
-      'answers': ["Sunflower", 'Lotus', 'Rose', "Belly"],
+      'answers': [
+        {'option': 'Sunflower', 'score': 1},
+        {'option': 'Lotus', 'score': 2},
+        {'option': 'Rose', 'score': 3},
+        {'option': 'Belly', 'score': 4}
+      ],
     }
   ];
+  var _questionIndex = 0;
+  var _totalScore = 0;
 
   // A Named function
-  void _answerQuestion() {
-    if (_questionIndex < _questions.length) {
-      if (kDebugMode) {
-        print('printing');
-      }
-    }
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       // rerender / change the UI
       _questionIndex += 1;
     });
     if (kDebugMode) {
       // if the app is in debug mode.
-      print(_questionIndex); // prints the debug console
+      print(_totalScore); // prints the debug console
     }
   }
 
@@ -70,7 +87,7 @@ class _MyAppstate extends State<MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : const Result(),
+            : Result(_totalScore),
       ),
     );
   }
