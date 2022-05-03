@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './transaction.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -12,13 +14,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
+
+  final List<Transaction> transactions = [
+    Transaction(
+        id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
+    Transaction(
+        id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +39,9 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               // * Chart
-              Card(
+              const Card(
                 color: Colors.amber,
                 child: SizedBox(
                   width: double.infinity,
@@ -41,9 +50,34 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               ),
               // * List of Transactions
-              Card(
-                color: Colors.green,
-                child: Text('List of TX'),
+              Column(
+                children: transactions.map((tx) {
+                  return Card(
+                      color: Colors.green,
+                      elevation: 5,
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Colors.black,
+                              width: 2,
+                            )),
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              tx.amount.toString(),
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Text(tx.title),
+                              Text(tx.date.toString())
+                            ],
+                          )
+                        ],
+                      ));
+                }).toList(),
               )
             ],
           ),
