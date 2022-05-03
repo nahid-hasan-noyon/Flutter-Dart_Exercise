@@ -30,6 +30,8 @@ class MyHomePage extends StatelessWidget {
         id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
   ];
 
+  String titleInput = '', amountInput = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +51,34 @@ class MyHomePage extends StatelessWidget {
                   child: Center(child: Text('Chart!')),
                 ),
                 elevation: 5,
+              ),
+              Card(
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TextField(
+                          decoration: const InputDecoration(labelText: 'Title'),
+                          onChanged: (input) {
+                            titleInput = input;
+                          },
+                        ),
+                        TextField(
+                          decoration:
+                              const InputDecoration(labelText: 'Amount'),
+                          onChanged: (input) => amountInput = input,
+                        ),
+                        FlatButton(
+                            child: const Text('Add Transaction'),
+                            textColor: Colors.purple,
+                            onPressed: () {
+                              print(titleInput);
+                              print(amountInput);
+                            })
+                      ]),
+                ),
               ),
               // * List of Transactions
               Column(
