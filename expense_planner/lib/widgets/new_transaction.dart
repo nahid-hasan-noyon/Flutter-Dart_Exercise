@@ -33,32 +33,33 @@ class _NewTransactionState extends State<NewTransaction> {
       elevation: 5,
       child: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          // * Enter Title
-          TextField(
-            decoration: const InputDecoration(labelText: 'Title'),
-            controller: titleController,
-            textInputAction: TextInputAction.next,
-            //(inputData) => submitData(),
-
-            // onChanged: (input) {
-            //   titleInput = input;
-            // },
-          ),
-          // * Enter Amount
-          TextField(
-            decoration: const InputDecoration(labelText: 'Amount'),
-            controller: amountController,
-            keyboardType: TextInputType.number,
-            onSubmitted: (inputData) => submitData(),
-            //// onChanged: (input) => amountInput = input,
-          ),
-          FlatButton(
-            child: const Text('Add Transaction'),
-            textColor: Theme.of(context).primaryColor,
-            onPressed: submitData,
-          )
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            // * Enter Title
+            TextField(
+              decoration: const InputDecoration(labelText: 'Title'),
+              controller: titleController,
+              textInputAction: TextInputAction.next,
+            ),
+            // * Enter Amount
+            TextField(
+              decoration: const InputDecoration(labelText: 'Amount'),
+              controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (inputData) => submitData(),
+              //// onChanged: (input) => amountInput = input,
+            ),
+            TextButton(
+              child: const Text('Add Transaction'),
+              style: TextButton.styleFrom(
+                backgroundColor: Theme.of(context).primaryColor,
+                primary: Colors.white,
+              ),
+              onPressed: submitData,
+            )
+          ],
+        ),
       ),
     );
   }
