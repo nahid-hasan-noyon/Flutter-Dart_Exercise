@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import './question.dart';
 
@@ -56,11 +56,11 @@ class _MyAppstate extends State<MyApp> {
 
               //*  adding buttons
               // first way
-              const RaisedButton(
-                // striped widgets means these should be used but can be in this version.
-                child: Text('Answer 1'),
-                onPressed: null, // null makes the button disable
-              ),
+              // ? const RaisedButton(
+              //   // striped widgets means these should be used but can be in this version.
+              //   child: Text('Answer 1'),
+              //   onPressed: null, // null makes the button disable
+              // ),
               // second way
               const ElevatedButton(
                 onPressed: null,
@@ -69,25 +69,25 @@ class _MyAppstate extends State<MyApp> {
 
               //* button that do something on a click.
               // 1. Using named function
-              RaisedButton(
-                child: const Text('Answer 3'),
-                onPressed: buttonWasClicked,
-                // ! Function have to be called without ().
-              ),
+              // ? RaisedButton(
+              //   child: const Text('Answer 3'),
+              //   onPressed: buttonWasClicked,
+              //   // ! Function have to be called without ().
+              // ),
               ElevatedButton(
                 child: const Text('Answer 4'),
                 onPressed: buttonWasClicked,
               ),
 
               // 2. Using anonymous function
-              RaisedButton(
-                child: const Text('Answer 5'),
-                onPressed: () {
-                  if (kDebugMode) {
-                    print('Answer 5 was clicked');
-                  }
-                },
-              ),
+              // ? RaisedButton(
+              //   child: const Text('Answer 5'),
+              //   onPressed: () {
+              //     if (kDebugMode) {
+              //       print('Answer 5 was clicked');
+              //     }
+              //   },
+              // ),
               ElevatedButton(
                 child: const Text('Answer 6'),
                 onPressed: () {
@@ -96,10 +96,10 @@ class _MyAppstate extends State<MyApp> {
                   }
                 },
               ),
-              RaisedButton(
-                child: const Text('change the question'),
-                onPressed: buttonWasClicked,
-              ),
+              // ? RaisedButton(
+              //   child: const Text('change the question'),
+              //   onPressed: buttonWasClicked,
+              // ),
             ],
           )),
     );

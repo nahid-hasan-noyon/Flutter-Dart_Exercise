@@ -12,11 +12,14 @@ class Answer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: RaisedButton(
-        color: Colors.blue,
-        textColor: Colors.white,
+      child: //// RaisedButton(
+          ElevatedButton(
         child: Text(answerText),
         onPressed: selcetHandler,
+        style: ElevatedButton.styleFrom(
+          primary: Colors.purple,
+          onPrimary: Colors.amber,
+        ),
       ),
     );
   }
