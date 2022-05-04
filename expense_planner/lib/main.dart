@@ -27,23 +27,25 @@ class MyHomePage extends StatelessWidget {
         appBar: AppBar(
           title: const Center(child: Text('Expanse Planner')),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const <Widget>[
-              // * Chart
-              Card(
-                color: Colors.amber,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Center(child: Text('Chart!')),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const <Widget>[
+                // * Chart
+                Card(
+                  color: Colors.amber,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Center(child: Text('Chart!')),
+                  ),
+                  elevation: 5,
                 ),
-                elevation: 5,
-              ),
-              UserTransaction()
-              // * List of Transactions
-            ],
+                UserTransaction(),
+                // * List of Transactions
+              ],
+            ),
           ),
         ));
   }
