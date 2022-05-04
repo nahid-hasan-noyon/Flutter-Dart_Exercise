@@ -17,22 +17,6 @@ class _UserTransactionState extends State<UserTransaction> {
         id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
     Transaction(
         id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
-    Transaction(
-        id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
-    Transaction(
-        id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
