@@ -1,8 +1,9 @@
-import 'package:expense_planner/widgets/new_transaction.dart';
 import 'package:flutter/material.dart';
 
-import 'models/transaction.dart';
-import 'widgets/transaction_list.dart';
+import '../models/transaction.dart';
+import '../widgets/transaction_list.dart';
+import '../widgets/chart.dart';
+import '../widgets/new_transaction.dart';
 
 void main() => runApp(const MyApp());
 
@@ -62,6 +63,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Transaction> get _recentTransacations {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _displayAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -95,14 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               // * Chart
-              const Card(
-                color: Colors.amber,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Center(child: Text('Chart!')),
-                ),
-                elevation: 5,
-              ),
+              Chart(_recentTransacations),
               TransactionList(_userTransactions),
               // * List of Transactions
             ],
