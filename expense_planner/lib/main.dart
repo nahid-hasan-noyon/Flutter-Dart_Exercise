@@ -6,21 +6,8 @@ import 'widgets/transaction_list.dart';
 
 void main() => runApp(const MyApp());
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  void displayAddNewTransaction(BuildContext ctx) {
-    showModalBottomSheet(
-        context: ctx,
-        builder: (_) {
-          return NewTransaction();
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +16,19 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
     Transaction(
         id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
@@ -55,6 +47,20 @@ class MyHomePage extends StatelessWidget {
     });
   }
 
+  void _displayAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            onTap: () {
+              // does nothing.
+            },
+            child: NewTransaction(_addNewTransaction),
+            //! behavior: HitTestBehavior.opaque,
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +68,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Expanse Planner'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => _displayAddNewTransaction(context),
             icon: const Icon(Icons.add),
           ),
         ],
@@ -72,9 +78,9 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const <Widget>[
+            children: <Widget>[
               // * Chart
-              Card(
+              const Card(
                 color: Colors.amber,
                 child: SizedBox(
                   width: double.infinity,
@@ -90,7 +96,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _displayAddNewTransaction(context),
       ),
     );
   }
