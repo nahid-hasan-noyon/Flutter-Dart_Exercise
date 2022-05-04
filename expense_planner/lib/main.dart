@@ -14,7 +14,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expanse Planner',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme:
+            ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
+          secondary: const Color.fromARGB(255, 220, 191, 86),
+        ),
+        fontFamily: 'Quicksand',
+        appBarTheme: AppBarTheme(
+            titleTextStyle: ThemeData.light()
+                .textTheme
+                .copyWith(
+                  titleLarge: const TextStyle(
+                    fontFamily: 'OpenSans',
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+                .headline6),
       ),
       home: const MyHomePage(),
     );
@@ -56,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // does nothing.
             },
             child: NewTransaction(_addNewTransaction),
-            //! behavior: HitTestBehavior.opaque,
+            behavior: HitTestBehavior.opaque,
           );
         });
   }
