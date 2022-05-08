@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
   final VoidCallback selcetHandler;
-
   final String answerText;
 
   const Answer(this.selcetHandler, this.answerText, {Key? key})

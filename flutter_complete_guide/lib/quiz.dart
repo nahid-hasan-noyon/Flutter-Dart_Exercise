@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'question.dart';
-import 'answer.dart';
+import './question.dart';
+import './answer.dart';
 
 class Quiz extends StatelessWidget {
-  //const Quiz(void Function() answerQuestion, List<Map<String, Object>> questions, {Key? key}) : super(key: key);
-
   final List<Map<String, Object>> questions;
   final int questionIndex;
   final Function answerQuestion;
+
+  //const Quiz({Key? key, required this.questions, required this.questionIndex, required this.answerQuestion}) : super(key: key);
 
   const Quiz(
       {Key? key,
