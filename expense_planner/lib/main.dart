@@ -117,6 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    // AppBar
     final appBar = AppBar(
       title: const Text('Expanse Planner'),
       actions: [
@@ -126,6 +129,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ],
     );
+    // * Transaction list
+    final txListWidget = SizedBox(
+      height: (MediaQuery.of(context).size.height -
+              appBar.preferredSize.height -
+              MediaQuery.of(context).padding.top) *
+          0.7,
+      child: TransactionList(_userTransactions, _deleteTransaction),
+    );
     return Scaffold(
       appBar: appBar,
       body: SingleChildScrollView(
@@ -134,46 +145,47 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // * Show Chart
-                  const Text("Show Chart"),
-                  IconButton(
-                    icon: Icon(
-                      _chartVisible == false
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _chartVisible
-                            ? _chartVisible = false
-                            : _chartVisible = true;
-                      });
-                    },
-                  )
-                ],
-              ),
-              // * Chart
-              _chartVisible
-                  ? const SizedBox(
-                      height: 2,
+              if (isLandscape)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // * Show Chart
+                    const Text("Show Chart"),
+                    IconButton(
+                      icon: Icon(
+                        _chartVisible == false
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _chartVisible
+                              ? _chartVisible = false
+                              : _chartVisible = true;
+                        });
+                      },
                     )
-                  : SizedBox(
-                      height: (MediaQuery.of(context).size.height -
-                              appBar.preferredSize.height -
-                              MediaQuery.of(context).padding.top) *
-                          0.7,
-                      child: Chart(_recentTransacations),
-                    ),
-              SizedBox(
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.7,
-                child: TransactionList(_userTransactions, _deleteTransaction),
-              ),
+                  ],
+                ),
+              // * Chart
+
+              if (!isLandscape)
+                SizedBox(
+                  height: (MediaQuery.of(context).size.height -
+                          appBar.preferredSize.height -
+                          MediaQuery.of(context).padding.top) *
+                      0.26,
+                  child: Chart(_recentTransacations),
+                )
+              else if (!_chartVisible)
+                SizedBox(
+                  height: (MediaQuery.of(context).size.height -
+                          appBar.preferredSize.height -
+                          MediaQuery.of(context).padding.top) *
+                      0.7,
+                  child: Chart(_recentTransacations),
+                ),
+              txListWidget,
               // const SizedBox(
               //   height: 4,
               // )

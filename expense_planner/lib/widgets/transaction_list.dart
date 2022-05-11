@@ -15,7 +15,7 @@ class TransactionList extends StatelessWidget {
         ? LayoutBuilder(
             builder: (context, constraints) {
               return Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     'No Transactions added yet',
