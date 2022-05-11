@@ -7,6 +7,7 @@ import '../widgets/new_transaction.dart';
 
 void main() {
   // * for fixing device orientation to portrait mode.
+  // WidgetsFlutterBinding.ensureInitialized();
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitDown,
   //   DeviceOrientation.portraitUp,
@@ -89,6 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  bool _chartVisible = false;
   List<Transaction> get _recentTransacations {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
@@ -132,14 +134,39 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              // * Chart
-              SizedBox(
-                height: (MediaQuery.of(context).size.height -
-                        appBar.preferredSize.height -
-                        MediaQuery.of(context).padding.top) *
-                    0.26,
-                child: Chart(_recentTransacations),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // * Show Chart
+                  const Text("Show Chart"),
+                  IconButton(
+                    icon: Icon(
+                      _chartVisible == false
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _chartVisible
+                            ? _chartVisible = false
+                            : _chartVisible = true;
+                      });
+                    },
+                  )
+                ],
               ),
+              // * Chart
+              _chartVisible
+                  ? const SizedBox(
+                      height: 2,
+                    )
+                  : SizedBox(
+                      height: (MediaQuery.of(context).size.height -
+                              appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.26,
+                      child: Chart(_recentTransacations),
+                    ),
               SizedBox(
                 height: (MediaQuery.of(context).size.height -
                         appBar.preferredSize.height -
