@@ -17,7 +17,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
   final amountController = TextEditingController();
 
-  void submitData() {
+  void _submitData() {
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
 
@@ -47,7 +47,7 @@ class _NewTransactionState extends State<NewTransaction> {
               decoration: const InputDecoration(labelText: 'Amount'),
               controller: amountController,
               keyboardType: TextInputType.number,
-              onSubmitted: (inputData) => submitData(),
+              onSubmitted: (inputData) => _submitData(),
             ),
             const SizedBox(
               height: 10,
@@ -78,7 +78,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 primary: Colors.purple,
                 onPrimary: Colors.white,
               ),
-              onPressed: submitData,
+              onPressed: _submitData,
             )
           ],
         ),
