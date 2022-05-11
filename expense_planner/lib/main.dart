@@ -117,8 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mC = MediaQuery.of(context);
+    final isLandscape = mC.orientation == Orientation.landscape;
     // AppBar
     final appBar = AppBar(
       title: const Text('Expanse Planner'),
@@ -131,10 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     // * Transaction list
     final txListWidget = SizedBox(
-      height: (MediaQuery.of(context).size.height -
-              appBar.preferredSize.height -
-              MediaQuery.of(context).padding.top) *
-          0.7,
+      height:
+          (mC.size.height - appBar.preferredSize.height - mC.padding.top) * 0.7,
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
     return Scaffold(
@@ -171,25 +169,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
               if (!isLandscape)
                 SizedBox(
-                  height: (MediaQuery.of(context).size.height -
+                  height: (mC.size.height -
                           appBar.preferredSize.height -
-                          MediaQuery.of(context).padding.top) *
+                          mC.padding.top) *
                       0.26,
                   child: Chart(_recentTransacations),
                 )
               else if (!_chartVisible)
                 SizedBox(
-                  height: (MediaQuery.of(context).size.height -
+                  height: (mC.size.height -
                           appBar.preferredSize.height -
-                          MediaQuery.of(context).padding.top) *
+                          mC.padding.top) *
                       0.7,
                   child: Chart(_recentTransacations),
                 ),
-              txListWidget,
-              // const SizedBox(
-              //   height: 4,
-              // )
+
               // * List of Transactions
+              txListWidget,
             ],
           ),
         ),
