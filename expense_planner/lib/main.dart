@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     // if in mobile setting text size is changed then this will change*
     // final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Expanse Planner',
       theme: ThemeData(
         textTheme: const TextTheme(
