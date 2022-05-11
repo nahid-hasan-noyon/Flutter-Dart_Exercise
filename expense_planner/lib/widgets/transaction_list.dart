@@ -34,7 +34,7 @@ class TransactionList extends StatelessWidget {
                     // exchange of card which is below commented
                     leading: CircleAvatar(
                       radius: 30,
-                      // / Container(
+                      // @@@ Container(
                       // height: 60,
                       // width: 60,
                       // decoration: const BoxDecoration(
