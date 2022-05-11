@@ -5,7 +5,14 @@ import '../widgets/transaction_list.dart';
 import '../widgets/chart.dart';
 import '../widgets/new_transaction.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  // * for fixing device orientation to portrait mode.
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitDown,
+  //   DeviceOrientation.portraitUp,
+  // ]);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
