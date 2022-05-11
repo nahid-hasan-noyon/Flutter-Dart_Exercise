@@ -11,64 +11,60 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 430,
-      child: transactions.isEmpty
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Text(
-                  'No Transactions added yet',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+    return transactions.isEmpty
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Text(
+                'No Transactions added yet',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Image.asset('assets/images/no_transactions.png')
+            ],
+          )
+        : ListView.builder(
+            itemBuilder: (context, index) {
+              return Card(
+                elevation: 5,
+                margin: const EdgeInsets.symmetric(
+                  vertical: 8,
+                  horizontal: 5,
                 ),
-                Image.asset('assets/images/no_transactions.png')
-              ],
-            )
-          : ListView.builder(
-              itemBuilder: (context, index) {
-                return Card(
-                  elevation: 5,
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 5,
-                  ),
-                  child: ListTile(
-                    // exchange of card which is below commented
-                    leading: CircleAvatar(
-                      radius: 30,
-                      // @@@ Container(
-                      // height: 60,
-                      // width: 60,
-                      // decoration: const BoxDecoration(
-                      //   color: Colors.blue,
-                      //   shape: BoxShape.circle,
-                      // ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: FittedBox(
-                            child: Text('\$${transactions[index].amount}')),
-                      ),
-                    ),
-                    title: Text(
-                      transactions[index].title,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                    subtitle: Text(
-                      DateFormat.yMMMd().format(transactions[index].date),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.delete),
-                      iconSize: 30,
-                      color: Colors.red,
-                      onPressed: () =>
-                          deleteTransaction(transactions[index].id),
+                child: ListTile(
+                  // exchange of card which is below commented
+                  leading: CircleAvatar(
+                    radius: 30,
+                    // @@@ Container(
+                    // height: 60,
+                    // width: 60,
+                    // decoration: const BoxDecoration(
+                    //   color: Colors.blue,
+                    //   shape: BoxShape.circle,
+                    // ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: FittedBox(
+                          child: Text('\$${transactions[index].amount}')),
                     ),
                   ),
-                );
-              },
-              itemCount: transactions.length,
-            ),
-    );
+                  title: Text(
+                    transactions[index].title,
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMd().format(transactions[index].date),
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete),
+                    iconSize: 30,
+                    color: Colors.red,
+                    onPressed: () => deleteTransaction(transactions[index].id),
+                  ),
+                ),
+              );
+            },
+            itemCount: transactions.length,
+          );
   }
 }
 

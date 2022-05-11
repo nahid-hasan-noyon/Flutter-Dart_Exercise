@@ -12,13 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // if in mobile setting text size is changed then this will change*
+    // final curScaleFactor = MediaQuery.of(context).textScaleFactor;
     return MaterialApp(
       title: 'Expanse Planner',
       theme: ThemeData(
         textTheme: const TextTheme(
           headline5: TextStyle(
             color: Colors.blue,
-            fontSize: 25,
+            fontSize: 25, ///// * curScaleFactor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -105,16 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: const Text('Expanse Planner'),
+      actions: [
+        IconButton(
+          onPressed: () => _displayAddNewTransaction(context),
+          icon: const Icon(Icons.add),
+        ),
+      ],
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Expanse Planner'),
-        actions: [
-          IconButton(
-            onPressed: () => _displayAddNewTransaction(context),
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -122,8 +125,23 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               // * Chart
-              Chart(_recentTransacations),
-              TransactionList(_userTransactions, _deleteTransaction),
+              SizedBox(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.3,
+                child: Chart(_recentTransacations),
+              ),
+              SizedBox(
+                height: (MediaQuery.of(context).size.height -
+                        appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.7,
+                child: TransactionList(_userTransactions, _deleteTransaction),
+              ),
+              // const SizedBox(
+              //   height: 4,
+              // )
               // * List of Transactions
             ],
           ),
