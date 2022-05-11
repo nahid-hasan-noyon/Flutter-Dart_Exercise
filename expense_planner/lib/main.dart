@@ -15,6 +15,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Expanse Planner',
       theme: ThemeData(
+        textTheme: const TextTheme(
+          headline5: TextStyle(
+            color: Colors.blue,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         colorScheme:
             ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
           secondary: const Color.fromARGB(255, 220, 191, 86),

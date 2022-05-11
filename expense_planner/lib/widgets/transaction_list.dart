@@ -34,6 +34,13 @@ class TransactionList extends StatelessWidget {
                     // exchange of card which is below commented
                     leading: CircleAvatar(
                       radius: 30,
+                      // / Container(
+                      // height: 60,
+                      // width: 60,
+                      // decoration: const BoxDecoration(
+                      //   color: Colors.blue,
+                      //   shape: BoxShape.circle,
+                      // ),
                       child: Padding(
                         padding: const EdgeInsets.all(5),
                         child: FittedBox(
@@ -42,7 +49,7 @@ class TransactionList extends StatelessWidget {
                     ),
                     title: Text(
                       transactions[index].title,
-                      // style:,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
