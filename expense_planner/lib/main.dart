@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  bool _chartVisible = false;
+  bool _chartVisible = true;
   List<Transaction> get _recentTransacations {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
@@ -179,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
               else
                 _buildPortraitContent(mQC, appBar),
 
-              if (!_chartVisible)
+              if (!_chartVisible && isLandscape)
                 SizedBox(
                   height: (mQC.size.height -
                           appBar.preferredSize.height -
