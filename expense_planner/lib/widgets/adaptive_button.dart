@@ -21,7 +21,7 @@ class AdaptiveButton extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        onPressed: () => handler,
+        onPressed: () => handler(),
       );
     } else {
       return TextButton(
@@ -33,7 +33,7 @@ class AdaptiveButton extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        onPressed: () => handler,
+        onPressed: () => handler(),
       );
     }
   }
