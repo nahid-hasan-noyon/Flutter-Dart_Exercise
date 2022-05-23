@@ -115,6 +115,35 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  Widget _buildLandscapeContent(MediaQueryData mQC, AppBar appBar) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // * Show Chart
+        const Text("Show Chart"),
+        IconButton(
+          icon: Icon(
+            _chartVisible == false ? Icons.visibility_off : Icons.visibility,
+          ),
+          onPressed: () {
+            setState(() {
+              _chartVisible ? _chartVisible = false : _chartVisible = true;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPortraitContent(MediaQueryData mQC, AppBar appBar) {
+    return SizedBox(
+      height:
+          (mQC.size.height - appBar.preferredSize.height - mQC.padding.top) *
+              0.26,
+      child: Chart(_recentTransacations),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final mQC = MediaQuery.of(context);
@@ -144,39 +173,13 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              if (isLandscape)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // * Show Chart
-                    const Text("Show Chart"),
-                    IconButton(
-                      icon: Icon(
-                        _chartVisible == false
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _chartVisible
-                              ? _chartVisible = false
-                              : _chartVisible = true;
-                        });
-                      },
-                    )
-                  ],
-                ),
               // * Chart
+              if (isLandscape)
+                _buildLandscapeContent(mQC, appBar)
+              else
+                _buildPortraitContent(mQC, appBar),
 
-              if (!isLandscape)
-                SizedBox(
-                  height: (mQC.size.height -
-                          appBar.preferredSize.height -
-                          mQC.padding.top) *
-                      0.26,
-                  child: Chart(_recentTransacations),
-                )
-              else if (!_chartVisible)
+              if (!_chartVisible)
                 SizedBox(
                   height: (mQC.size.height -
                           appBar.preferredSize.height -
@@ -184,7 +187,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       0.7,
                   child: Chart(_recentTransacations),
                 ),
-
               // * List of Transactions
               txListWidget,
             ],
