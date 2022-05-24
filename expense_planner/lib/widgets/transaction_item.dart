@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
-class TransactionItem extends StatelessWidget {
+class TransactionItem extends StatefulWidget {
   const TransactionItem({
     Key? key,
     required this.transaction,
@@ -11,6 +13,25 @@ class TransactionItem extends StatelessWidget {
 
   final Transaction transaction;
   final Function deleteTransaction;
+
+  @override
+  State<TransactionItem> createState() => _TransactionItemState();
+}
+
+class _TransactionItemState extends State<TransactionItem> {
+  late Color _bgColor;
+
+  @override
+  void initState() {
+    const availableColors = [
+      Colors.amber,
+      Colors.blue,
+      Colors.red,
+      Colors.green,
+    ];
+    _bgColor = availableColors[Random().nextInt(4)];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +44,7 @@ class TransactionItem extends StatelessWidget {
       child: ListTile(
         // exchange of card which is below commented
         leading: CircleAvatar(
+          backgroundColor: _bgColor,
           radius: 30,
           // @@@ Container(
           // height: 60,
@@ -33,15 +55,15 @@ class TransactionItem extends StatelessWidget {
           // ),
           child: Padding(
             padding: const EdgeInsets.all(5),
-            child: FittedBox(child: Text('\$${transaction.amount}')),
+            child: FittedBox(child: Text('\$${widget.transaction.amount}')),
           ),
         ),
         title: Text(
-          transaction.title,
+          widget.transaction.title,
           style: Theme.of(context).textTheme.headline5,
         ),
         subtitle: Text(
-          DateFormat.yMMMd().format(transaction.date),
+          DateFormat.yMMMd().format(widget.transaction.date),
         ),
         trailing: MediaQuery.of(context).size.width > 460
             ? TextButton(
@@ -57,16 +79,18 @@ class TransactionItem extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    deleteTransaction(transaction.id);
+                    widget.deleteTransaction(widget.transaction.id);
                   },
                 ),
-                onPressed: () => deleteTransaction(transaction.id),
+                onPressed: () =>
+                    widget.deleteTransaction(widget.transaction.id),
               )
             : IconButton(
                 icon: const Icon(Icons.delete),
                 iconSize: 30,
                 color: Colors.red,
-                onPressed: () => deleteTransaction(transaction.id),
+                onPressed: () =>
+                    widget.deleteTransaction(widget.transaction.id),
               ),
       ),
     );
