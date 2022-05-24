@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../models/transaction.dart';
@@ -62,12 +63,20 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _userTransactions = [
     // Transaction(
-    //     id: 't1', title: 'New Shoes', amount: 700, date: DateTime.now()),
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 700,
+    //   date: DateTime.now(),
+    // ),
     // Transaction(
-    //     id: 't2', title: 'New Dress', amount: 600, date: DateTime.now()),
+    //   id: 't2',
+    //   title: 'New Dress',
+    //   amount: 600,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addNewTransaction(String txTitle, double txAmount, DateTime txDate) {
@@ -82,6 +91,31 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool _chartVisible = true;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (kDebugMode) {
+      print(state);
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    if (kDebugMode) {
+      print('state');
+    }
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
   void _deleteTransaction(String id) {
     setState(
       () {
@@ -90,7 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  bool _chartVisible = true;
   List<Transaction> get _recentTransacations {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
