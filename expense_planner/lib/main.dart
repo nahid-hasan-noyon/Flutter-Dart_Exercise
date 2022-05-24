@@ -27,16 +27,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Expanse Planner',
       theme: ThemeData(
+        primaryColor: Colors.white,
         textTheme: const TextTheme(
           headline5: TextStyle(
             color: Colors.blue,
             fontSize: 25, ///// * curScaleFactor,
             fontWeight: FontWeight.bold,
           ),
-        ),
-        colorScheme:
-            ColorScheme.fromSwatch(primarySwatch: Colors.blue).copyWith(
-          secondary: const Color.fromARGB(255, 220, 191, 86),
         ),
         fontFamily: 'Quicksand',
         appBarTheme: AppBarTheme(
@@ -50,6 +47,11 @@ class MyApp extends StatelessWidget {
                   ),
                 )
                 .headline6),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(
+              secondary: const Color.fromARGB(255, 220, 191, 86),
+            )
+            .copyWith(secondary: Colors.blue),
       ),
       home: const MyHomePage(),
     );
