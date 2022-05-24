@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meal_app/categories_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'DeliMeals'),
     );
   }
 }
@@ -37,12 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('DeliMeals'),
       ),
-      body: Center(
-        child: Text(
-          'Navigation Time!',
-          style: Theme.of(context).textTheme.headline4,
-        ),
-      ),
+      body: const CategoriesScreen(),
     );
   }
 }
