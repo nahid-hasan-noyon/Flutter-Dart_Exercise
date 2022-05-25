@@ -34,6 +34,30 @@ class MealItem extends StatelessWidget {
       required this.complexity})
       : super(key: key);
 
+  String get complexityText {
+    if (complexity == Complexity.Simple) {
+      return 'Simple';
+    } else if (complexity == Complexity.Challenging) {
+      return 'Challenging';
+    } else if (complexity == Complexity.Hard) {
+      return 'Hard';
+    } else {
+      return 'Unknown';
+    }
+  }
+
+  String get affordabilityText {
+    if (affordability == Affordability.Affordable) {
+      return 'Affordable';
+    } else if (affordability == Affordability.Luxurious) {
+      return 'Luxurious';
+    } else if (affordability == Affordability.Pricey) {
+      return 'Pricey';
+    } else {
+      return 'Unknown';
+    }
+  }
+
   void selectMeal() {}
 
   @override
@@ -60,11 +84,74 @@ class MealItem extends StatelessWidget {
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
+              ),
+              Positioned(
+                bottom: 20,
+                right: 20,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                  ),
+                  child: Container(
+                    color: Colors.black54,
+                    width: 200,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 5,
+                    ),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                ),
               )
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.schedule),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text('$duration min'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.work),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(complexityText),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(Icons.attach_money),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(affordabilityText),
+                    ],
+                  )
+                ]),
           )
         ]),
       ),
     );
   }
 }
+
+class $ {}
