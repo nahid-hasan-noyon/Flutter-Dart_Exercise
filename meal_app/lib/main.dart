@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/screens/category_meals_screen.dart';
 import 'package:meal_app/screens/meal_detail_screen.dart';
+import 'package:meal_app/screens/tabs_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,18 +38,19 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
         //     .copyWith(secondary: Colors.amber),
       ),
-      initialRoute: CategoriesScreen.routeName,
+      initialRoute: TabsScreen.routeName,
       routes: {
         CategoriesScreen.routeName: (context) => const CategoriesScreen(),
         CategoryMealsScreen.routeName: (context) => const CategoryMealsScreen(),
         MealDetailScreen.routeName: (context) => const MealDetailScreen(),
+        TabsScreen.routeName: (context) => const TabsScreen(),
       },
       onGenerateRoute: (settings) {
         if (kDebugMode) {
           print(settings.arguments);
         }
         return MaterialPageRoute(
-          builder: (context) => const CategoriesScreen(),
+          builder: (context) => const TabsScreen(),
         );
       },
       onUnknownRoute: (settings) {
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
           print(settings.arguments);
         }
         return MaterialPageRoute(
-          builder: (context) => const CategoriesScreen(),
+          builder: (context) => const TabsScreen(),
         );
       },
     );
