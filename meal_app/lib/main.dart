@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
     'vegetarian': false,
   };
   List<Meal> _availableMeals = dummyMeal;
+  final List<Meal> _favoriteMeals = [];
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           return false;
         }
         return true;
-      }) as List<Meal>;
+      }).toList();
     });
   }
 
@@ -66,7 +67,7 @@ class _MyAppState extends State<MyApp> {
         CategoryMealsScreen.routeName: (context) =>
             CategoryMealsScreen(availableMeals: _availableMeals),
         MealDetailScreen.routeName: (context) => const MealDetailScreen(),
-        TabsScreen.routeName: (context) => const TabsScreen(),
+        TabsScreen.routeName: (context) => TabsScreen(_favoriteMeals),
         FiltersScreen.routeName: (context) => FiltersScreen(
               saveFilters: _setFilters,
               currentFilters: _filters,
@@ -77,7 +78,7 @@ class _MyAppState extends State<MyApp> {
           print(settings.arguments);
         }
         return MaterialPageRoute(
-          builder: (context) => const TabsScreen(),
+          builder: (context) => TabsScreen(_favoriteMeals),
         );
       },
       onUnknownRoute: (settings) {
@@ -85,7 +86,7 @@ class _MyAppState extends State<MyApp> {
           print(settings.arguments);
         }
         return MaterialPageRoute(
-          builder: (context) => const TabsScreen(),
+          builder: (context) => TabsScreen(_favoriteMeals),
         );
       },
     );

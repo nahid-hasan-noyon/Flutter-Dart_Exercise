@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:meal_app/Models/meal.dart';
 import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/screens/favorites_screen.dart';
 import 'package:meal_app/widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/';
+  List<Meal> favoriteMeals;
 
-  const TabsScreen({Key? key}) : super(key: key);
+  TabsScreen(this.favoriteMeals, {Key? key}) : super(key: key);
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  final List<Widget> _pages = [
-    const CategoriesScreen(),
-    const FavoritesScreen(),
-  ];
+  late List<Map<String, Object>> _pages;
+  int _selectedPageIndex = 0;
 
-  late int _selectedPageIndex = 0;
-  String title = 'Categories';
+  @override
+  void initState() {
+    _pages = [
+      {
+        'page': const CategoriesScreen(),
+        'title': 'Categories',
+      },
+      {
+        'page': FavoritesScreen(widget.favoriteMeals),
+        'title': 'Your Favorite',
+      },
+    ];
+    super.initState();
+  }
 
   void _selectPage(int index) {
     setState(() {
       _selectedPageIndex = index;
-      if (_selectedPageIndex == 0) {
-        title = 'Categories';
-      } else if (_selectedPageIndex == 1) {
-        title = 'Your Favorites';
-      }
     });
   }
-
-  String cat = 'Categories';
-  final String label = 'Categories';
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +65,10 @@ class _TabsScreenState extends State<TabsScreen> {
     // );
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(_pages[_selectedPageIndex]['title'] as String),
       ),
       drawer: const MainDrawer(),
-      body: _pages[_selectedPageIndex],
+      body: _pages[_selectedPageIndex]['page'] as Widget,
 
       // * bottom nav bar
       bottomNavigationBar: BottomNavigationBar(
@@ -75,16 +79,16 @@ class _TabsScreenState extends State<TabsScreen> {
         currentIndex: _selectedPageIndex,
         type: BottomNavigationBarType.fixed,
         elevation: 4,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.category),
+            icon: Icon(Icons.category),
             backgroundColor: Colors.blue,
-            label: label,
+            label: 'Categories',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.blue,
-            icon: const Icon(Icons.favorite),
-            label: label,
+            icon: Icon(Icons.favorite),
+            label: 'Your Favorite',
           )
         ],
       ),
