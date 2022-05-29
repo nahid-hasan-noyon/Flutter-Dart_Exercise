@@ -17,7 +17,6 @@ class MealItem extends StatelessWidget {
   final bool isLactoseFree;
   final bool isVegan;
   final bool isVegetarian;
-  final Function removeItem;
 
   const MealItem(
       {Key? key,
@@ -31,7 +30,6 @@ class MealItem extends StatelessWidget {
       required this.isLactoseFree,
       required this.isVegan,
       required this.isVegetarian,
-      required this.removeItem,
       required this.steps,
       required this.title,
       required this.complexity})
@@ -62,17 +60,9 @@ class MealItem extends StatelessWidget {
   }
 
   void selectMeal(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(
+    Navigator.of(context).pushNamed(
       MealDetailScreen.routeName,
       arguments: id,
-    )
-        .then(
-      (result) {
-        if (result != null) {
-          removeItem(result);
-        }
-      },
     );
   }
 
@@ -169,5 +159,3 @@ class MealItem extends StatelessWidget {
     );
   }
 }
-
-class $ {}
