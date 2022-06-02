@@ -13,7 +13,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       //? gives border radius to any widget
       borderRadius: BorderRadius.circular(15),
@@ -42,19 +42,21 @@ class ProductItem extends StatelessWidget {
           },
         ),
         footer: GridTileBar(
-          leading: IconButton(
-            color: Colors.redAccent,
-            icon: Icon(
-              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+          leading: Consumer<Product>(
+            builder: (context, product, child) => IconButton(
+              color: Colors.redAccent,
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
             ),
-            onPressed: () {
-              product.toggleFavoriteStatus();
-            },
           ),
           //? creates bar for a grid tile.
           backgroundColor: Colors.black87,
           title: Text(
-            product.title,
+            '${product.price}',
             textAlign: TextAlign.center,
           ),
           trailing: Icon(
