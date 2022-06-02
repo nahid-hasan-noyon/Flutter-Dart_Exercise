@@ -11,17 +11,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => ProductsProvider(),
+      create: (ctx) => ProductsProvider(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'MyShop',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: ProductOverviewScreen.routeName,
+        home: ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          ProductOverviewScreen.routeName: (ctx) => ProductOverviewScreen(),
+          ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(),
         },
       ),
     );
