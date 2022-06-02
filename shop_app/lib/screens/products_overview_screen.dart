@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/widgets/products_grid.dart';
 
-class ProductOverviewScreen extends StatelessWidget {
+class ProductsOverviewScreen extends StatelessWidget {
   static const routeName = '/product-overview';
 
 //* Dummy products
