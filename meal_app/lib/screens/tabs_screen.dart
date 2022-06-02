@@ -4,6 +4,7 @@ import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/screens/favorites_screen.dart';
 import 'package:meal_app/widgets/main_drawer.dart';
 
+// ignore: must_be_immutable
 class TabsScreen extends StatefulWidget {
   static const routeName = '/';
   List<Meal> favoriteMeals;

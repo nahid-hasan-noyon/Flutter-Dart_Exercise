@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/dummy_data.dart';
 
+// ignore: must_be_immutable
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
 
