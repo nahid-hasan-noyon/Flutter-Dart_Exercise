@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:flutter_complete_guide/providers/product.dart';
 import 'package:flutter_complete_guide/screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  String id;
-  String title;
-  String imageUrl;
+  // String id;
+  // String title;
+  // String imageUrl;
 
-  ProductItem(this.id, this.title, this.imageUrl);
+  // ProductItem(this.id, this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Product>(context);
     return ClipRRect(
       //? gives border radius to any widget
       borderRadius: BorderRadius.circular(15),
@@ -17,7 +21,7 @@ class ProductItem extends StatelessWidget {
         header: GridTileBar(
           backgroundColor: Colors.black87,
           title: Center(
-            child: Text(title),
+            child: Text(product.title),
           ),
         ),
         //? create each grid tile for grid view but can be used without gridView.
@@ -26,24 +30,31 @@ class ProductItem extends StatelessWidget {
           onTap: () {
             Navigator.of(context).pushNamed(
               ProductDetailScreen.routeName,
-              arguments: id,
+              arguments: product.id,
             );
           },
           child: Image.network(
-            imageUrl,
+            product.imageUrl,
             fit: BoxFit.cover,
           ),
-          onDoubleTap: () {},
+          onDoubleTap: () {
+            product.toggleFavoriteStatus();
+          },
         ),
         footer: GridTileBar(
           leading: IconButton(
-            icon: Icon(Icons.favorite),
-            onPressed: () {},
+            color: Colors.redAccent,
+            icon: Icon(
+              product.isFavorite ? Icons.favorite : Icons.favorite_border,
+            ),
+            onPressed: () {
+              product.toggleFavoriteStatus();
+            },
           ),
           //? creates bar for a grid tile.
           backgroundColor: Colors.black87,
           title: Text(
-            title,
+            product.title,
             textAlign: TextAlign.center,
           ),
           trailing: Icon(
