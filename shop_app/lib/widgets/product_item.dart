@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/providers/cart.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_complete_guide/providers/product.dart';
@@ -14,6 +15,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
+    final cart = Provider.of<Cart>(context, listen: false);
     return ClipRRect(
       //? gives border radius to any widget
       borderRadius: BorderRadius.circular(15),
@@ -37,9 +39,6 @@ class ProductItem extends StatelessWidget {
             product.imageUrl,
             fit: BoxFit.cover,
           ),
-          onDoubleTap: () {
-            product.toggleFavoriteStatus();
-          },
         ),
         footer: GridTileBar(
           leading: Consumer<Product>(
@@ -59,8 +58,13 @@ class ProductItem extends StatelessWidget {
             '${product.price}',
             textAlign: TextAlign.center,
           ),
-          trailing: Icon(
-            (Icons.shopping_bag_outlined),
+          trailing: IconButton(
+            icon: Icon(
+              (Icons.shopping_bag_outlined),
+            ),
+            onPressed: () {
+              cart.addItem(product.id, product.title, product.price);
+            },
           ),
         ),
       ),
