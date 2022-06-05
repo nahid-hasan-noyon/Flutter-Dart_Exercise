@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/providers/cart.dart';
+import 'package:flutter_complete_guide/providers/cart_items_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_complete_guide/widgets/badge.dart';
 // import 'package:provider/provider.dart';
@@ -48,7 +48,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   ),
                 ]),
           ),
-          Consumer<Cart>(
+          Consumer<CartItemProvider>(
             builder: (ctx, cart, ch) => Badge(
               child: ch,
               value: cart.itemCount.toString(),
