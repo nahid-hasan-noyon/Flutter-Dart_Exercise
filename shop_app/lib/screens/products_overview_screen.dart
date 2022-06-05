@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/providers/cart.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_complete_guide/widgets/badge.dart';
 // import 'package:provider/provider.dart';
 
 import 'package:flutter_complete_guide/widgets/products_grid.dart';
@@ -44,7 +47,19 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                     value: FilterOptions.All,
                   ),
                 ]),
-          )
+          ),
+          Consumer<Cart>(
+            builder: (ctx, cart, ch) => Badge(
+              child: ch,
+              value: cart.itemCount.toString(),
+            ),
+            child: IconButton(
+              icon: Icon(
+                Icons.shopping_cart,
+              ),
+              onPressed: () {},
+            ),
+          ),
         ],
       ),
       body: ProductsGrid(_showFavoritesOnly),
