@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/providers/orders.dart';
 import 'package:flutter_complete_guide/widgets/build_cart_item.dart';
 import 'package:flutter_complete_guide/providers/cart_items_provider.dart';
 import 'package:provider/provider.dart';
@@ -27,10 +28,19 @@ class CartScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20),
                   ),
                   Chip(
-                    label: Text('\$${cart.totalAmount}'),
+                    label: Text('\$${cart.totalAmount.toStringAsFixed(2)}'),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (cart.totalAmount != 0.00) {
+                        Provider.of<Orders>(context, listen: false).addOrder(
+                          cart.items.values.toList(),
+                          cart.totalAmount,
+                        );
+                      }
+
+                      cart.clearCart();
+                    },
                     child: Text('Order Now'),
                   ),
                 ]),
