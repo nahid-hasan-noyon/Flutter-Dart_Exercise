@@ -13,12 +13,12 @@ class Answer extends StatelessWidget {
       width: double.infinity,
       child: //// RaisedButton(
           ElevatedButton(
-        child: Text(answerText),
         onPressed: selcetHandler,
         style: ElevatedButton.styleFrom(
           primary: Colors.purple,
           onPrimary: Colors.amber,
         ),
+        child: Text(answerText),
       ),
     );
   }

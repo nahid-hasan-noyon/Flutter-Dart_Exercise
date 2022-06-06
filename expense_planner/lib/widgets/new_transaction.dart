@@ -102,12 +102,12 @@ class _NewTransactionState extends State<NewTransaction> {
                 height: 20,
               ),
               ElevatedButton(
-                child: const Text('Add Transaction'),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.purple,
                   onPrimary: Colors.white,
                 ),
                 onPressed: _submitData,
+                child: const Text('Add Transaction'),
               )
             ],
           ),

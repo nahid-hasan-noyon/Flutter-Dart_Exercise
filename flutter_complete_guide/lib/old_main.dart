@@ -75,8 +75,8 @@ class _MyAppstate extends State<MyApp> {
               //   // ! Function have to be called without ().
               // ),
               ElevatedButton(
-                child: const Text('Answer 4'),
                 onPressed: buttonWasClicked,
+                child: const Text('Answer 4'),
               ),
 
               // 2. Using anonymous function

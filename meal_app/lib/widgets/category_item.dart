@@ -35,9 +35,6 @@ class CategoryItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(15),
-        child: Center(
-          child: Text(title),
-        ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [color.withOpacity(0.7), color],
@@ -45,6 +42,9 @@ class CategoryItem extends StatelessWidget {
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(15),
+        ),
+        child: Center(
+          child: Text(title),
         ),
       ),
     );
