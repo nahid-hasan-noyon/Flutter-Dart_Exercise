@@ -19,6 +19,7 @@ class BuildCartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // todo make alternative with slidable widget
     return Dismissible(
       direction: DismissDirection.endToStart,
       key: ValueKey(id),
