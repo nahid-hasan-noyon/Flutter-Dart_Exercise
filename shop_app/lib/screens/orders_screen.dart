@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/providers/orders.dart';
-import 'package:flutter_complete_guide/widgets/app_drawer.dart';
+import 'package:flutter_complete_guide/widgets/build_drawer.dart';
 import 'package:flutter_complete_guide/widgets/build_order_item.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class OrdersScreen extends StatelessWidget {
         title: Text('Your Orders'),
         automaticallyImplyLeading: true,
       ),
-      drawer: AppDrawer(),
+      drawer: BuildDrawer(),
       body: ListView.builder(
         itemBuilder: (context, index) =>
             BuildOrderItem(orderData.orders[index]),
