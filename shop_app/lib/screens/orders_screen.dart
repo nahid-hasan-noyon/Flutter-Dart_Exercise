@@ -4,9 +4,25 @@ import 'package:flutter_complete_guide/widgets/build_drawer.dart';
 import 'package:flutter_complete_guide/widgets/build_order_item.dart';
 import 'package:provider/provider.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
   static const routeName = '/orders';
   const OrdersScreen({key}) : super(key: key);
+
+  @override
+  State<OrdersScreen> createState() => _OrdersScreenState();
+}
+
+class _OrdersScreenState extends State<OrdersScreen> {
+  Future _ordersFuture;
+  Future _obtainOrderFuture() {
+    return Provider.of<Orders>(context, listen: false).fetchAndSetOrders();
+  }
+
+  @override
+  void initState() {
+    _ordersFuture = _obtainOrderFuture();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +34,27 @@ class OrdersScreen extends StatelessWidget {
         automaticallyImplyLeading: true,
       ),
       drawer: BuildDrawer(),
-      body: ListView.builder(
-        itemBuilder: (context, index) =>
-            BuildOrderItem(orderData.orders[index]),
-        itemCount: orderData.orders.length,
-      ),
+      body: FutureBuilder(
+          future: _ordersFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              if (snapshot.error != null) {
+                return Center(
+                  child: Text('An error occurred!'),
+                );
+              } else {
+                return ListView.builder(
+                  itemBuilder: (context, index) =>
+                      BuildOrderItem(orderData.orders[index]),
+                  itemCount: orderData.orders.length,
+                );
+              }
+            }
+          }),
     );
   }
 }
