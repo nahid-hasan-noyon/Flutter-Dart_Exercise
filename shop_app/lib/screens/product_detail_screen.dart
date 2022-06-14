@@ -4,11 +4,11 @@ import 'package:flutter_complete_guide/providers/products_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  static const routeName = '/product-details';
+  static const routeName = '/product-detail';
 
   @override
   Widget build(BuildContext context) {
-    String productId = ModalRoute.of(context).settings.arguments as String;
+    final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<ProductsProvider>(
       context,
       listen: false,
