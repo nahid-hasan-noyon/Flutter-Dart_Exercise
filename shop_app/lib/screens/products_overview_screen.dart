@@ -20,19 +20,25 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showFavoritesOnly = false;
+  var _isInit = true;
   var _isLoading = false;
 
   @override
-  void initState() {
-    _isLoading = true;
-    Provider.of<ProductsProvider>(context, listen: false)
-        .fetchAndSetProducts()
-        .then((_) {
+  void didChangeDependencies() {
+    if (_isInit) {
       setState(() {
-        _isLoading = false;
+        _isLoading = true;
       });
-    });
-    super.initState();
+      Provider.of<ProductsProvider>(context, listen: false)
+          .fetchAndSetProducts()
+          .then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+    }
+    _isInit = false;
+    super.didChangeDependencies();
   }
 
   @override
@@ -52,26 +58,24 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 }
               });
             },
-            itemBuilder: ((context) => [
-                  PopupMenuItem(
-                    child: Text('Only Favorites'),
-                    value: FilterOptions.Favorites,
-                  ),
-                  PopupMenuItem(
-                    child: Text('Show All'),
-                    value: FilterOptions.All,
-                  ),
-                ]),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: Text('Only Favorites'),
+                value: FilterOptions.Favorites,
+              ),
+              PopupMenuItem(
+                child: Text('Show All'),
+                value: FilterOptions.All,
+              ),
+            ],
           ),
           Consumer<CartItemProvider>(
-            builder: (ctx, cart, ch) => Badge(
-              child: ch,
+            builder: (ctx, cart, child) => Badge(
+              child: child,
               value: cart.itemCount.toString(),
             ),
             child: IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-              ),
+              icon: Icon(Icons.shopping_cart),
               onPressed: () {
                 Navigator.of(context).pushNamed(CartScreen.routeName);
               },
