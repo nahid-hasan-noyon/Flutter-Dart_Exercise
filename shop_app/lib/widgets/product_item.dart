@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/providers/auth.dart';
 import 'package:flutter_complete_guide/providers/cart_items_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -6,16 +7,11 @@ import 'package:flutter_complete_guide/providers/product.dart';
 import 'package:flutter_complete_guide/screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  // String id;
-  // String title;
-  // String imageUrl;
-
-  // ProductItem(this.id, this.title, this.imageUrl);
-
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<CartItemProvider>(context, listen: false);
+    final authData = Provider.of<Auth>(context, listen: false);
     return ClipRRect(
       //? gives border radius to any widget
       borderRadius: BorderRadius.circular(15),
@@ -48,7 +44,7 @@ class ProductItem extends StatelessWidget {
                 product.isFavorite ? Icons.favorite : Icons.favorite_border,
               ),
               onPressed: () {
-                product.toggleFavoriteStatus();
+                product.toggleFavoriteStatus(authData.token, authData.userId);
               },
             ),
           ),
