@@ -1,10 +1,9 @@
 import 'dart:math';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_complete_guide/models/http_exception.dart';
 import 'package:flutter_complete_guide/providers/auth.dart';
-import 'package:flutter_complete_guide/screens/products_overview_screen.dart';
-import 'package:provider/provider.dart';
 
 enum AuthMode { SignUp, Login }
 
@@ -48,7 +47,6 @@ class AuthScreen extends StatelessWidget {
                           EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
                       transform: Matrix4.rotationZ(-8 * pi / 180)
                         ..translate(-10.0),
-                      // ..translate(-10.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.deepOrange.shade900,
@@ -152,7 +150,7 @@ class _AuthCardState extends State<AuthCard> {
       } else if (error.toString().contains('WEAK_PASSWORD')) {
         errorMessage = 'This password is too weak.';
       } else if (error.toString().contains('EMAIL_NOT_FOUND')) {
-        errorMessage = 'Could not find a user with that email.';
+        errorMessage = 'Could not find a user with that email address.';
       } else if (error.toString().contains('INVALID_PASSWORD')) {
         errorMessage = 'Invalid password.';
       }
@@ -167,8 +165,9 @@ class _AuthCardState extends State<AuthCard> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.of(context)
-        .pushReplacementNamed(ProductsOverviewScreen.routeName);
+    // * not in that file
+    // Navigator.of(context)
+    //     .pushReplacementNamed(ProductsOverviewScreen.routeName);
   }
 
   void _switchAuthMode() {
@@ -220,7 +219,7 @@ class _AuthCardState extends State<AuthCard> {
                   obscureText: true,
                   controller: _passwordController,
                   validator: (value) {
-                    if (value.isEmpty || value.length < 1) {
+                    if (value.isEmpty || value.length < 5) {
                       return 'Password is too short!';
                     }
                     return null;
