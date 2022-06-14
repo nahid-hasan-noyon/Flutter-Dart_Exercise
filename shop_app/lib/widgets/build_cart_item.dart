@@ -9,13 +9,13 @@ class BuildCartItem extends StatelessWidget {
   final int quantity;
   final String title;
 
-  BuildCartItem(
+  BuildCartItem({
     this.id,
     this.productId,
     this.price,
     this.quantity,
     this.title,
-  );
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class BuildCartItem extends StatelessWidget {
               );
             });
       },
-      onDismissed: (dismiss) {
+      onDismissed: (direction) {
         Provider.of<CartItemProvider>(context, listen: false)
             .removeItem(productId);
       },
@@ -72,13 +72,13 @@ class BuildCartItem extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(5),
                 child: FittedBox(
-                  child: Text('\$${price}'),
+                  child: Text('\$$price'),
                 ),
               ),
             ),
             title: Text(title),
-            subtitle: Text('Total \$${(price * quantity)}'),
-            trailing: Text('${quantity}'),
+            subtitle: Text('Total: \$${(price * quantity)}'),
+            trailing: Text('$quantity x'),
           ),
         ),
       ),
