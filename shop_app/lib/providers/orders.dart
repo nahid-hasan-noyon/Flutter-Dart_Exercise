@@ -51,6 +51,7 @@ class Orders with ChangeNotifier {
             .toString(),
       }),
     );
+    print(response.body);
     _orders.insert(
       0,
       OrderItem(
@@ -73,22 +74,21 @@ class Orders with ChangeNotifier {
     if (extractedData == null) {
       return;
     }
+    print(extractedData);
     extractedData.forEach((orderId, orderData) {
       loadedOrders.add(
         OrderItem(
           id: orderId,
           amount: orderData['amount'],
           dateTime: DateTime.parse(orderData['dateTime']),
-          products: (orderData['products'] as List<dynamic>)
-              .map(
-                (item) => CartItem(
-                  id: item['id'],
-                  price: item['price'],
-                  quantity: item['quantity'],
-                  title: item['title'],
-                ),
-              )
-              .toList(),
+          products: (orderData['products'] as List<dynamic>).map(
+            (item) => CartItem(
+              id: item['id'],
+              price: item['price'],
+              quantity: item['quantity'],
+              title: item['title'],
+            ),
+          ),
         ),
       );
     });
