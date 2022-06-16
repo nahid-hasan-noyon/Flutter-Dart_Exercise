@@ -1,5 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/providers/cart_item.dart';
+
+class CartItem {
+  final String id;
+  final String title;
+  final int quantity;
+  final double price;
+
+  CartItem({
+    this.id,
+    this.price,
+    this.quantity,
+    this.title,
+  });
+}
 
 class CartItemProvider with ChangeNotifier {
   Map<String, CartItem> _items = {};
@@ -13,21 +26,25 @@ class CartItemProvider with ChangeNotifier {
   }
 
   double get totalAmount {
-    var total = 0.0;
+    double total = 0.0;
     _items.forEach((key, cartItem) {
-      total += cartItem.price * cartItem.quantity;
+      total += cartItem.price * cartItem.quantity.toDouble();
     });
     return total;
   }
 
-  void addItem(String productId, String title, double price) {
+  void addItem(
+    String productId,
+    double price,
+    String title,
+  ) {
     if (_items.containsKey(productId)) {
       _items.update(
         productId,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
-          price: existingCartItem.price,
           title: existingCartItem.title,
+          price: existingCartItem.price,
           quantity: existingCartItem.quantity + 1,
         ),
       );
