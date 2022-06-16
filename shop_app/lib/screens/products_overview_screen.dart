@@ -24,7 +24,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _isLoading = false;
 
   @override
-  void didChangeDependencies() {
+  Future<void> didChangeDependencies() async {
     if (_isInit) {
       setState(() {
         _isLoading = true;
