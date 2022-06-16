@@ -35,7 +35,6 @@ class ProductsProvider with ChangeNotifier {
         filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     var url = Uri.parse(
         'https://shop-app-d68a8-default-rtdb.firebaseio.com/products.json?auth=$authToken&$filterString');
-    // try {
     final response = await http.get(url);
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     url = Uri.parse(
@@ -63,9 +62,6 @@ class ProductsProvider with ChangeNotifier {
     });
     _items = loadedProducts;
     notifyListeners();
-    // } catch (error) {
-    //   throw error;
-    // }
   }
 
   Future<void> addProduct(Product product) async {

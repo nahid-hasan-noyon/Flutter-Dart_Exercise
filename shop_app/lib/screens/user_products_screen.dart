@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
-  const UserProductsScreen({Key key}) : super(key: key);
 
   Future<void> _refreshProducts(BuildContext context) async {
     await Provider.of<ProductsProvider>(context, listen: false)
@@ -33,7 +32,9 @@ class UserProductsScreen extends StatelessWidget {
         future: _refreshProducts(context),
         builder: (context, snapshot) =>
             snapshot.connectionState == ConnectionState.waiting
-                ? Center(child: CircularProgressIndicator())
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
                 : RefreshIndicator(
                     onRefresh: () => _refreshProducts(context),
                     child: Consumer<ProductsProvider>(

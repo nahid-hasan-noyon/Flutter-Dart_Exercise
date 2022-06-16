@@ -66,7 +66,7 @@ class BuildCartItem extends StatelessWidget {
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
               child: Padding(

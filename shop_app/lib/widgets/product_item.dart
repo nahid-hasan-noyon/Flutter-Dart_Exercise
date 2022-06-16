@@ -59,7 +59,7 @@ class ProductItem extends StatelessWidget {
               (Icons.shopping_bag_outlined),
             ),
             onPressed: () {
-              cart.addItem(product.id, product.title, product.price);
+              cart.addItem(product.id, product.price, product.title);
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_complete_guide/providers/cart_items_provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_complete_guide/providers/cart_item.dart';
 
 class OrderItem {
-  String id;
-  double amount;
-  List<CartItem> products;
-  DateTime dateTime;
+  final String id;
+  final double amount;
+  final List<CartItem> products;
+  final DateTime dateTime;
 
   OrderItem({
     this.id,
@@ -81,14 +81,16 @@ class Orders with ChangeNotifier {
           id: orderId,
           amount: orderData['amount'],
           dateTime: DateTime.parse(orderData['dateTime']),
-          products: (orderData['products'] as List<dynamic>).map(
-            (item) => CartItem(
-              id: item['id'],
-              price: item['price'],
-              quantity: item['quantity'],
-              title: item['title'],
-            ),
-          ),
+          products: (orderData['products'] as List<dynamic>)
+              .map(
+                (item) => CartItem(
+                  id: item['id'],
+                  price: item['price'],
+                  quantity: item['quantity'],
+                  title: item['title'],
+                ),
+              )
+              .toList(),
         ),
       );
     });

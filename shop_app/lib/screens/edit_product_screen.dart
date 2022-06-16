@@ -105,7 +105,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           context: context,
           builder: (ctx) => AlertDialog(
             title: Text('An error occurred!'),
-            content: Text('Something went wrong.'),
+            content: Text(error.toString()),
             actions: [
               TextButton(
                 onPressed: () {
@@ -267,14 +267,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             },
                             validator: (value) {
                               if (value.isEmpty) {
-                                return 'Please Provide an image URL.';
-                              } else if (!value.startsWith('http') &&
-                                  !value.startsWith('https')) {
-                                return 'Please enter a valid UR L.';
-                              } else if (!value.endsWith('png') &&
-                                  !value.endsWith('jpg') &&
-                                  !value.endsWith('jpeg')) {
-                                return 'Please enter a valid image URL.';
+                                return 'Please enter an image URL';
+                              }
+                              if (!value.startsWith('https') &&
+                                  !value.startsWith('http')) {
+                                return 'Please enter a valid URL';
+                              }
+                              if (!value.endsWith('.png') &&
+                                  !value.endsWith('.jpg') &&
+                                  !value.endsWith('.jpeg')) {
+                                return 'Please enter a valid image URL';
                               }
                               return null;
                             },

@@ -5,8 +5,6 @@ import 'package:flutter_complete_guide/screens/user_products_screen.dart';
 import 'package:provider/provider.dart';
 
 class BuildDrawer extends StatelessWidget {
-  const BuildDrawer({key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Drawer(

@@ -35,10 +35,9 @@ class CartScreen extends StatelessWidget {
                   ]),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Expanded(
+          SizedBox(height: 10),
+          Flexible(
+            fit: FlexFit.tight,
             child: ListView.builder(
               itemBuilder: (context, index) => BuildCartItem(
                 id: cart.items.values.toList()[index].id,
@@ -80,15 +79,13 @@ class _OrderButtonState extends State<OrderButton> {
               setState(() {
                 _isLoading = true;
               });
-              if (widget.cart.totalAmount != 0.00) {
-                await Provider.of<Orders>(context, listen: false).addOrder(
-                  widget.cart.items.values.toList(),
-                  widget.cart.totalAmount,
-                );
-                setState(() {
-                  _isLoading = false;
-                });
-              }
+              await Provider.of<Orders>(context, listen: false).addOrder(
+                widget.cart.items.values.toList(),
+                widget.cart.totalAmount,
+              );
+              setState(() {
+                _isLoading = false;
+              });
 
               widget.cart.clear();
             },
