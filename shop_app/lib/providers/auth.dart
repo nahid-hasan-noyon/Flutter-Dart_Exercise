@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/models/http_exception.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -12,6 +13,8 @@ class Auth with ChangeNotifier {
   DateTime _expiryDate;
   String _userId;
   Timer _authTimer;
+
+  final firebaseApi = FlutterConfig.get('Firebase_API');
 
   bool get isAuth {
     return token != null;
@@ -33,7 +36,7 @@ class Auth with ChangeNotifier {
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
     final url = Uri.parse(
-      'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAqKNDvFcmGCDBDG5LS-LoZ1QjmQb2_1t0',
+      'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=$firebaseApi',
     );
     try {
       final response = await http.post(
