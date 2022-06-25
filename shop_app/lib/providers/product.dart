@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -19,9 +20,11 @@ class Product with ChangeNotifier {
     this.isFavorite = false,
   });
 
+  final firebaseRDBLink = FlutterConfig.get('Firebase_RDB_link');
+
   Future<void> toggleFavoriteStatus(String token, String userId) async {
     final url = Uri.parse(
-        'https://shop-app-d68a8-default-rtdb.firebaseio.com/user-favorites/$userId/$id.json?auth=$token');
+        '$firebaseRDBLink/user-favorites/$userId/$id.json?auth=$token');
     final oldStatus = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();

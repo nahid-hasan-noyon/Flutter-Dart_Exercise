@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_complete_guide/providers/cart_items_provider.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -32,9 +33,11 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
+  final firebaseRDBLink = FlutterConfig.get('Firebase_RDB_link');
+
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    final url = Uri.parse(
-        'https://shop-app-d68a8-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken');
+    final url =
+        Uri.parse('$firebaseRDBLink/orders/$userId.json?auth=$authToken');
     final timeStamp = DateTime.now();
     final response = await http.post(
       url,

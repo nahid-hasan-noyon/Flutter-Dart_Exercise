@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_complete_guide/models/http_exception.dart';
@@ -9,6 +10,8 @@ class ProductsProvider with ChangeNotifier {
   List<Product> _items = [];
   String authToken;
   String userId;
+
+  final firebaseRDBLink = FlutterConfig.get('Firebase_RDB_link');
 
   void assignTokenAndUserId(String token, String id) {
     authToken = token;
@@ -34,11 +37,11 @@ class ProductsProvider with ChangeNotifier {
     final filterString =
         filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
     var url = Uri.parse(
-        'https://shop-app-d68a8-default-rtdb.firebaseio.com/products.json?auth=$authToken&$filterString');
+        '$firebaseRDBLink/products.json?auth=$authToken&$filterString');
     final response = await http.get(url);
     final extractedData = json.decode(response.body) as Map<String, dynamic>;
     url = Uri.parse(
-        'https://shop-app-d68a8-default-rtdb.firebaseio.com/user-favorites/$userId.json?auth=$authToken');
+        '$firebaseRDBLink/user-favorites/$userId.json?auth=$authToken');
     final favoriteResponse = await http.get(url);
     final favoriteData = json.decode(favoriteResponse.body);
 
@@ -65,8 +68,7 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    final url = Uri.parse(
-        'https://shop-app-d68a8-default-rtdb.firebaseio.com/products.json?auth=$authToken');
+    final url = Uri.parse('$firebaseRDBLink/products.json?auth=$authToken');
     try {
       final response = await http.post(
         url,
@@ -98,8 +100,8 @@ class ProductsProvider with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
-      final url = Uri.parse(
-          'https://shop-app-d68a8-default-rtdb.firebaseio.com/products/$id.json?auth=$authToken');
+      final url =
+          Uri.parse('$firebaseRDBLink/products/$id.json?auth=$authToken');
       await http.patch(
         url,
         body: json.encode(
@@ -117,8 +119,7 @@ class ProductsProvider with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = Uri.parse(
-        'https://shop-app-d68a8-default-rtdb.firebaseio.com/products/$id.json?auth=$authToken');
+    final url = Uri.parse('$firebaseRDBLink/products/$id.json?auth=$authToken');
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
     var existingProduct = _items[existingProductIndex];
     _items.removeAt(existingProductIndex);
