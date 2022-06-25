@@ -1,5 +1,7 @@
+import 'package:favorite_places/providers/great_places.dart';
 import 'package:favorite_places/screens/add_place_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
   static const routeName = '/';
@@ -19,8 +21,35 @@ class PlacesListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const Center(
-        child: CircularProgressIndicator(),
+      body: FutureBuilder(
+        future: Provider.of<GreatPlaces>(context, listen: false)
+            .fetchAndSetPlaces(),
+        builder: (context, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? const Center(child: CircularProgressIndicator())
+            : Consumer<GreatPlaces>(
+                builder: (context, greatPlaces, child) => greatPlaces
+                        .items.isEmpty
+                    ? const Center(
+                        child: Text('Got no places yet, start adding some!'),
+                      )
+                    : ListView.builder(
+                        itemCount: greatPlaces.items.length,
+                        itemBuilder: (ctx, i) {
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: FileImage(
+                                greatPlaces.items[i].image,
+                              ),
+                            ),
+                            title: Text(greatPlaces.items[i].title),
+                            onTap: () {
+                              // * goto detail page
+                            },
+                          );
+                        },
+                      ),
+              ),
       ),
     );
   }
