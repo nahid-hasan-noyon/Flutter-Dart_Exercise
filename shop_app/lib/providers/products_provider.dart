@@ -55,7 +55,9 @@ class ProductsProvider with ChangeNotifier {
           id: prodId,
           title: prodData['title'],
           description: prodData['description'],
-          price: prodData['price'],
+          price: prodData['price'] is int
+              ? prodData['price'].toDouble()
+              : prodData['price'],
           imageUrl: prodData['imageUrl'],
           isFavorite: favoriteData == null
               ? false

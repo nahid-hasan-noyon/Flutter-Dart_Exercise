@@ -11,7 +11,7 @@ import 'package:flutter_complete_guide/widgets/products_grid.dart';
 
 enum FilterOptions { Favorites, All }
 
-class ProductsOverviewScreen extends StatefulWidget {
+classProductsOverviewScreen extends StatefulWidget {
   static const routeName = '/product-overview';
 
   @override
