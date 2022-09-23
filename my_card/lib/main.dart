@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             const Card(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(15),
               color: Colors.white,
               child: ListTile(
                 leading: Icon(
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             const Card(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(15),
               color: Colors.white,
               child: ListTile(
                 leading: Icon(
