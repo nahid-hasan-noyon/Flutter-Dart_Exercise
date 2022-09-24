@@ -2,6 +2,7 @@ import 'package:quizzler/model/question.dart';
 
 class QuizBrain {
   int _questionNumber = 0;
+  int _correctlyAnswered = 0;
   final List<Question> _questionBank = [
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
@@ -37,9 +38,29 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionAnswer;
   }
 
-  void nextQuestion() {
+  bool nextQuestion() {
     if (_questionNumber < _questionBank.length - 1) {
       _questionNumber++;
+      return false;
+    } else {
+      return true;
     }
+  }
+
+  void resetQuestionNumber() {
+    _questionNumber = 0;
+    _correctlyAnswered = 0;
+  }
+
+  bool isQuestionFinished() {
+    return _questionNumber < _questionBank.length ? false : true;
+  }
+
+  void addAnsweredCorrectly() {
+    _correctlyAnswered++;
+  }
+
+  int showAnsweredCorrectly() {
+    return _correctlyAnswered;
   }
 }
