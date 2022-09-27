@@ -20,7 +20,7 @@ class BottomButton extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
-              fontSize: 45,
+              fontSize: 40,
             ),
           ),
         ),

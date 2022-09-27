@@ -24,14 +24,42 @@ class ResultPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('Your Result'),
-          Text(resultText),
-          Text(
-            bmiResult.toString(),
+          const Expanded(
+            child: Text(
+              'Your Result',
+              style: TextStyle(
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-          Text(
-            interpretation,
-            textAlign: TextAlign.center,
+          Expanded(
+            child: Text(
+              resultText,
+              style: TextStyle(
+                color: resultText == 'Normal' ? Colors.green : Colors.red,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              bmiResult.toString(),
+              style: const TextStyle(
+                fontSize: 100.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              interpretation,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 25,
+              ),
+            ),
           ),
           BottomButton(
             label: 'RE-CALCULATE',
