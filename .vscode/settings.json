@@ -6,5 +6,14 @@
 		"Transacations",
 		"selcet"
 	],
-	"cSpell.words": ["cupertino", "Quizzler", "Raleway", "RGBO"]
+	"cSpell.words": [
+		"APIKEY",
+		"clima",
+		"cupertino",
+		"dotenv",
+		"geolocator",
+		"Quizzler",
+		"Raleway",
+		"RGBO"
+	]
 }
