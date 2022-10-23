@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flash_chat/constants.dart';
 
@@ -10,6 +11,27 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
+  final _auth = FirebaseAuth.instance;
+  late FirebaseAuth loggedInUser;
+
+  void getCurrentUser() async {
+    try {
+      final user = _auth.currentUser!;
+      print(user);
+      // loggedInUser = user;
+      // print(loggedInUser.email);
+
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    getCurrentUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

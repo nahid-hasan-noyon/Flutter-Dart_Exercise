@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flash_chat/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,10 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class RegistrationScreenState extends State<RegistrationScreen> {
+  late String email;
+  late String password;
+
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +38,9 @@ class RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
+              style: const TextStyle(color: Colors.black),
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
               decoration:
                   kInputDecoration.copyWith(hintText: 'Enter your email'),
@@ -42,8 +49,11 @@ class RegistrationScreenState extends State<RegistrationScreen> {
               height: 8.0,
             ),
             TextField(
+              style: const TextStyle(color: Colors.black),
+              obscureText: true,
+              obscuringCharacter: '*',
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
               decoration:
                   kInputDecoration.copyWith(hintText: 'Enter your password'),
@@ -54,8 +64,17 @@ class RegistrationScreenState extends State<RegistrationScreen> {
             CustomButton(
                 label: 'Register',
                 color: Colors.blueAccent,
-                onPressed: () {
-                  //Implement registration functionality.
+                onPressed: () async {
+                  // print(email);
+                  // print(password);
+                  try {
+                    var newUser = await _auth.createUserWithEmailAndPassword(
+                        email: email, password: password);
+
+                    Navigator.of(context).pushNamed(ChatScreen.routeName);
+                  } catch (e) {
+                    print(e);
+                  }
                 }),
           ],
         ),
