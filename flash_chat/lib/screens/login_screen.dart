@@ -113,7 +113,8 @@ class LoginScreenState extends State<LoginScreen> {
                       stateOfButton = ButtonState.success;
                     });
                     Future.delayed(const Duration(seconds: 2), () {
-                      Navigator.of(context).pushNamed(ChatScreen.routeName);
+                      Navigator.of(context)
+                          .pushReplacementNamed(ChatScreen.routeName);
                     });
                   } catch (e) {
                     setState(() {
