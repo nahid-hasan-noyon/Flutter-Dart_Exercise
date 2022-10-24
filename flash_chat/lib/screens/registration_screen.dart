@@ -63,13 +63,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                 obscuringCharacter: '*',
                 textInputAction: TextInputAction.done,
                 onChanged: (value) {
-                  if (!value.contains('@')) {
-                    setState(() {
-                      showSnackBar(context, 'Invalid email');
-                    });
-                  } else {
-                    password = value;
-                  }
+                  password = value;
                 },
                 decoration:
                     kInputDecoration.copyWith(hintText: 'Enter your password'),
