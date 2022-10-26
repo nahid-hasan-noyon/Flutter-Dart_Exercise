@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/modals/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/providers/task_data.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 import 'package:todoey/widgets/task_list.dart';
 
-class TaskScreen extends StatefulWidget {
+class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
-
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'first'),
-    Task(name: 'first2'),
-    Task(name: 'first3'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +45,7 @@ class _TaskScreenState extends State<TaskScreen> {
                     height: 10,
                   ),
                   Text(
-                    '${tasks.length} Tasks',
+                    '${Provider.of<TaskData>(context).tasks.length} Tasks',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -77,9 +67,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                   color: Colors.white,
                 ),
-                child: TaskList(
-                  tasks: tasks,
-                ),
+                child: TaskList(),
               ),
             ),
           ],
@@ -91,9 +79,9 @@ class _TaskScreenState extends State<TaskScreen> {
             context: context,
             builder: (context) => AddTaskScreen(
               ((newTaskTitle) {
-                setState(() {
-                  tasks.add(Task(name: newTaskTitle));
-                });
+                // setState(() {
+                //   tasks.add(Task(name: newTaskTitle));
+                // });
                 Navigator.pop(context);
               }),
             ),
