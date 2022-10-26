@@ -30,8 +30,8 @@ class _TaskScreenState extends State<TaskScreen> {
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 30,
                     child: Icon(
@@ -40,10 +40,10 @@ class _TaskScreenState extends State<TaskScreen> {
                       size: 35,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     'Todoey',
                     style: TextStyle(
                       color: Colors.white,
@@ -51,17 +51,17 @@ class _TaskScreenState extends State<TaskScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    '12 Tasks',
-                    style: TextStyle(
+                    '${tasks.length} Tasks',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
@@ -89,7 +89,14 @@ class _TaskScreenState extends State<TaskScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => const AddTaskScreen(),
+            builder: (context) => AddTaskScreen(
+              ((newTaskTitle) {
+                setState(() {
+                  tasks.add(Task(name: newTaskTitle));
+                });
+                Navigator.pop(context);
+              }),
+            ),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
