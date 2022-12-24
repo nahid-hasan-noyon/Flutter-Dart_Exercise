@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grocery_app/providers/dark_theme_provider.dart';
-import 'package:grocery_app/screens/home_screen.dart';
 import 'package:grocery_app/constants.dart';
+import 'package:grocery_app/widgets/bottom_nav_widget.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: themeData(themeProvider.getDarkTheme, context),
-          home: const HomeScreen(),
+          home: const BottomNavWidget(),
         );
       }),
     );
