@@ -10,6 +10,7 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final _addressController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
@@ -42,7 +43,9 @@ class _UserScreenState extends State<UserScreen> {
                     icon: Icons.manage_accounts_outlined,
                     title: "Address",
                     subtitle: "My Address",
-                    onPress: () {},
+                    onPress: () async {
+                      await _showAddressUpdateDialog(context);
+                    },
                   ),
                   _listTiles(
                     icon: Icons.shopping_bag_outlined,
@@ -86,7 +89,9 @@ class _UserScreenState extends State<UserScreen> {
                   _listTiles(
                     icon: Icons.exit_to_app_outlined,
                     title: "Logout",
-                    onPress: () {},
+                    onPress: () async {
+                      await _showLogOutDialog(context);
+                    },
                   ),
                 ],
               ),
@@ -94,6 +99,67 @@ class _UserScreenState extends State<UserScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<dynamic> _showAddressUpdateDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Update Address'),
+          content: TextField(
+            controller: _addressController,
+            maxLines: 5,
+            decoration: const InputDecoration(
+              hintText: "Your address",
+            ),
+            onChanged: (value) {
+              _addressController.text = value;
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // todo store the updated address
+              },
+              child: const Text('Update'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<dynamic> _showLogOutDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            children: const [
+              Icon(Icons.logout),
+              SizedBox(
+                width: 5,
+              ),
+              Text("Logout"),
+            ],
+          ),
+          content: const Text("Do you wanna Logout?"),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.canPop(context) ? Navigator.pop(context) : "";
+                },
+                child: const Text('Cancel')),
+            TextButton(
+                onPressed: () {
+                  // todo add log out method
+                },
+                child: const Text('Logout'))
+          ],
+        );
+      },
     );
   }
 
