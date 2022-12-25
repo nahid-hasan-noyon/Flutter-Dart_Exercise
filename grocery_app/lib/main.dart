@@ -43,14 +43,15 @@ class _MyAppState extends State<MyApp> {
           return darkThemeProvider;
         })
       ],
-      child:
-          Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: themeData(themeProvider.getDarkTheme, context),
-          home: const BottomNavWidget(),
-        );
-      }),
+      child: Consumer<DarkThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: themeData(themeProvider.getDarkTheme, context),
+            home: const BottomNavWidget(),
+          );
+        },
+      ),
     );
   }
 }
