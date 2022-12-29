@@ -23,6 +23,7 @@ class PriceWidget extends StatelessWidget {
               color: Colors.black,
               decoration: TextDecoration.lineThrough,
               decorationColor: Colors.red,
+              decorationThickness: 2,
             ),
           ),
         ],

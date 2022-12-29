@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/widgets/heart_btn_widget.dart';
 import 'package:grocery_app/widgets/price_widget.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -45,14 +46,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                               MdiIcons.cartOutline,
                             ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              // todo add action
-                            },
-                            child: const Icon(
-                              MdiIcons.heartOutline,
-                            ),
-                          )
+                          const HeartBTNWidget(),
                         ],
                       )
                     ],
