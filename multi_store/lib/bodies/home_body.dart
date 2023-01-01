@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multi_store/pages/search_page.dart';
+
+import '../widgets/fake_search.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -10,47 +11,7 @@ class HomeBody extends StatelessWidget {
       length: 9,
       child: Scaffold(
         appBar: AppBar(
-          title: InkWell(
-            onTap: () {
-              Navigator.of(context).pushNamed(SearchPage.routeName);
-            },
-            child: Container(
-              height: 35,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.yellow,
-                  width: 1.5,
-                ),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(
-                    width: 1,
-                  ),
-                  const Icon(
-                    Icons.search,
-                    color: Colors.grey,
-                  ),
-                  const Text(
-                    'What are you looking for?',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Container(
-                    height: 32,
-                    width: 75,
-                    decoration: BoxDecoration(
-                        color: Colors.yellow,
-                        borderRadius: BorderRadius.circular(25)),
-                  )
-                ],
-              ),
-            ),
-          ),
+          title: const FakeSearchWidget(),
           backgroundColor: Colors.white,
           elevation: 0,
           bottom: const TabBar(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../bodies/category_body.dart';
 import '../bodies/home_body.dart';
 
 class CustomHomePage extends StatefulWidget {
@@ -15,9 +16,7 @@ class _CustomHomePageState extends State<CustomHomePage> {
 
   final List<Widget> _bodies = [
     const HomeBody(),
-    const Center(
-      child: Text('Category Tab'),
-    ),
+    const CategoryBody(),
     const Center(
       child: Text('Stores Tab'),
     ),
