@@ -45,6 +45,7 @@ class FakeSearchWidget extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.yellow,
                   borderRadius: BorderRadius.circular(25)),
+              child: const Center(child: Text('Search')),
             )
           ],
         ),
