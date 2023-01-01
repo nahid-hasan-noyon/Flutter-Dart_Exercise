@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../tabs/home_tab.dart';
+import '../bodies/home_body.dart';
 
 class CustomHomePage extends StatefulWidget {
   const CustomHomePage({super.key});
@@ -12,8 +12,8 @@ class CustomHomePage extends StatefulWidget {
 class _CustomHomePageState extends State<CustomHomePage> {
   int _selectedIndex = 0;
 
-  final List<Widget> _tabs = [
-    const HomeTab(),
+  final List<Widget> _bodies = [
+    const HomeBody(),
     const Center(
       child: Text('Category Tab'),
     ),
@@ -30,7 +30,7 @@ class _CustomHomePageState extends State<CustomHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs[_selectedIndex],
+      body: _bodies[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.black,
