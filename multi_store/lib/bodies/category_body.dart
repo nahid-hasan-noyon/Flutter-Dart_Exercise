@@ -22,6 +22,18 @@ class CategoryBody extends StatefulWidget {
 
 class _CategoryBodyState extends State<CategoryBody> {
   @override
+  void initState() {
+    for (var item in items) {
+      item.isSelected = false;
+    }
+    setState(() {
+      items[0].isSelected = true;
+    });
+    super.initState();
+  }
+
+  final PageController _pageController = PageController();
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
@@ -54,12 +66,11 @@ class _CategoryBodyState extends State<CategoryBody> {
           itemBuilder: ((context, index) {
             return GestureDetector(
               onTap: () {
-                for (var item in items) {
-                  item.isSelected = false;
-                }
-                setState(() {
-                  items[index].isSelected = true;
-                });
+                _pageController.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
+                );
               },
               child: Container(
                 height: 100,
@@ -80,6 +91,29 @@ class _CategoryBodyState extends State<CategoryBody> {
         height: size.height * 0.8,
         width: size.width * 0.8,
         color: Colors.white,
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (value) {
+            for (var item in items) {
+              item.isSelected = false;
+            }
+            setState(() {
+              items[value].isSelected = true;
+            });
+          },
+          scrollDirection: Axis.vertical,
+          children: const [
+            Center(child: Text('Men')),
+            Center(child: Text('Women')),
+            Center(child: Text('Shoes')),
+            Center(child: Text('Bags')),
+            Center(child: Text('Electronics')),
+            Center(child: Text('Accessories')),
+            Center(child: Text('Home & Garden')),
+            Center(child: Text('Kids')),
+            Center(child: Text('Beauty')),
+          ],
+        ),
       );
 }
 
