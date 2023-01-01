@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store/pages/custom_home_page.dart';
+import 'package:multi_store/pages/search_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const CustomHomePage(),
+      routes: {
+        CustomHomePage.routeName: (context) => const CustomHomePage(),
+        SearchPage.routeName: (context) => const SearchPage(),
+      },
     );
   }
 }

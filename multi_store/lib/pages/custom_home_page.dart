@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../bodies/home_body.dart';
 
 class CustomHomePage extends StatefulWidget {
+  static const String routeName = 'custom-home-page';
   const CustomHomePage({super.key});
 
   @override
