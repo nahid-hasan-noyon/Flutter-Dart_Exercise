@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store/utilities/category_list.dart';
 import 'package:multi_store/widgets/fake_search.dart';
+
+import '../widgets/sub_category_builder.dart';
 
 List<ItemData> items = [
   ItemData(label: 'Men'),
@@ -102,16 +105,16 @@ class _CategoryBodyState extends State<CategoryBody> {
             });
           },
           scrollDirection: Axis.vertical,
-          children: const [
-            Center(child: Text('Men')),
-            Center(child: Text('Women')),
-            Center(child: Text('Shoes')),
-            Center(child: Text('Bags')),
-            Center(child: Text('Electronics')),
-            Center(child: Text('Accessories')),
-            Center(child: Text('Home & Garden')),
-            Center(child: Text('Kids')),
-            Center(child: Text('Beauty')),
+          children: [
+            SubCategoryBuilder(category: 'Men', items: men),
+            SubCategoryBuilder(category: 'Women', items: women),
+            SubCategoryBuilder(category: 'Shoes', items: shoes),
+            SubCategoryBuilder(category: 'Bags', items: bags),
+            SubCategoryBuilder(category: 'Electronics', items: electronics),
+            SubCategoryBuilder(category: 'Accessories', items: accessories),
+            SubCategoryBuilder(category: 'HomeGarden', items: homeandgarden),
+            SubCategoryBuilder(category: 'Kids', items: kids),
+            SubCategoryBuilder(category: 'Beauty', items: beauty),
           ],
         ),
       );
