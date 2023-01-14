@@ -6,15 +6,15 @@ import '../bodies/category_body.dart';
 import '../bodies/home_body.dart';
 import 'profile_page.dart';
 
-class CustomHomePage extends StatefulWidget {
-  static const String routeName = 'custom-home-page';
-  const CustomHomePage({super.key});
+class CustomerHomePage extends StatefulWidget {
+  static const String routeName = 'customer-home-page';
+  const CustomerHomePage({super.key});
 
   @override
-  State<CustomHomePage> createState() => _CustomHomePageState();
+  State<CustomerHomePage> createState() => _CustomerHomePageState();
 }
 
-class _CustomHomePageState extends State<CustomHomePage> {
+class _CustomerHomePageState extends State<CustomerHomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _bodies = [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:multi_store/pages/custom_home_page.dart';
+
+import 'customer_home_page.dart';
 
 class CartPage extends StatelessWidget {
   static const String routeName = 'cart-page';
@@ -48,7 +49,7 @@ class CartPage extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.of(context)
-                    .pushReplacementNamed(CustomHomePage.routeName);
+                    .pushReplacementNamed(CustomerHomePage.routeName);
               },
               child: const Text('Start Shopping'),
             ),

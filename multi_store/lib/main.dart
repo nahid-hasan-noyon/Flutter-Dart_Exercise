@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:multi_store/pages/custom_home_page.dart';
+import 'package:multi_store/pages/customer_home_page.dart';
 import 'package:multi_store/pages/search_page.dart';
 
 import 'pages/cart_page.dart';
@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CustomHomePage(),
+      home: const CustomerHomePage(),
       routes: {
-        CustomHomePage.routeName: (context) => const CustomHomePage(),
+        CustomerHomePage.routeName: (context) => const CustomerHomePage(),
         SearchPage.routeName: (context) => const SearchPage(),
         StoresPage.routeName: (context) => const StoresPage(),
         CartPage.routeName: (context) => const CartPage(),
