@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:multi_store/pages/cart_page.dart';
+import 'package:multi_store/pages/stores_page.dart';
 
 import '../bodies/category_body.dart';
 import '../bodies/home_body.dart';
+import 'profile_page.dart';
 
 class CustomHomePage extends StatefulWidget {
   static const String routeName = 'custom-home-page';
@@ -17,15 +20,9 @@ class _CustomHomePageState extends State<CustomHomePage> {
   final List<Widget> _bodies = [
     const HomeBody(),
     const CategoryBody(),
-    const Center(
-      child: Text('Stores Tab'),
-    ),
-    const Center(
-      child: Text('Cart Tab'),
-    ),
-    const Center(
-      child: Text('Profile Tab'),
-    ),
+    const StoresPage(),
+    const CartPage(),
+    const ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
